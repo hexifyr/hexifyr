@@ -16,7 +16,7 @@ function openDiscordApp() {
 
   function myFunction() {
     var copyText = "LUejdqgSQZEdhgFonr5SMfwJfThPmTLyDU";
-    navigator.clipboard.writeText(copyText.value);
+    navigator.clipboard.writeText(copyText);
     
     var tooltip = document.getElementById("myTooltip");
     tooltip.innerHTML = "Wallet Address Copied!";
