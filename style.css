@@ -204,8 +204,8 @@
     .heading-container h1{
         font-family: 'ginto';
         font-size: 44px;  
-         width: min-content;
-        white-space: nowrap;
+         width: max-content;
+        /* white-space: nowrap; */
     }
 
     .buttons{
@@ -604,11 +604,15 @@
   
   @media screen and (max-width: 1250px){
 
-    .max-width{
+   #main .max-width{
       width: 90%;
       flex-direction: column;
+      justify-content: flex-start;
     }
-
+    #moreinfo h1{
+      width: 100%;
+      white-space: wrap;
+    }
 
     .heading-container{
       width: 100%;
@@ -620,7 +624,7 @@
     }
 
     .image-container{
-      height: 50vh;
+      height: 40vh;
       width: 100%;
     }
 
@@ -641,20 +645,36 @@
     .heading-container h2{
       width: 100%;
     }
-
+    .image-container{
+      height: 30vh;
+      width: 100%;
+    }
+    
     .heading-container h1{
       white-space: wrap;
+      width: 100%;
     }
 
-    #moreinfo h1{
-      width: 100%;
-      white-space: wrap;
+   
+    #main .max-width{
+      justify-content: flex-start;
     }
+
+  
   }
 
 
   
   @media screen and (max-width: 630px){
+
+    #main .max-width{
+      justify-content: flex-start;
+    }
+
+    .image-container{
+      height: 30vh;
+    }
+
     .heading-container{
       margin-top: 10%;
     }}
@@ -669,4 +689,8 @@
     @media screen and (max-width: 365px){
       .heading-container{
         margin-top: 20%;
-      }}
+      }
+    .image-container{
+      display: none;
+    }
+    }
