@@ -692,6 +692,9 @@
       .heading-container{
       margin-top: 30%;
       }
+      .image-container{
+        display: none;
+      }
     }
       
     @media screen and (max-width: 365px){
