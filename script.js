@@ -169,3 +169,29 @@ document.getElementById("cards").onmousemove = e => {
 // Update the time immediately and then every second
 updateTime();
 setInterval(updateTime, 1000);
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const helloText = document.getElementById("helloText");
+  const overlay = document.getElementById("overlay");
+  const greetings = ["Hello", "Bonjour", "Ciao", "Olà", "やあ", "Hallå", "مرحبا", "Guten tag", "Hallo", "नमस्ते"];
+  let index = 0;
+
+  function changeText() {
+      helloText.innerHTML = "<li>" + greetings[index] + "</li>";
+      index = (index + 1) % greetings.length;
+  }
+
+  function startAnimation() {
+      overlay.classList.add("move-up");
+  }
+
+  // Change text every 500ms
+  const textInterval = setInterval(changeText, 250);
+
+  // Start moving up animation after 3 seconds
+  setTimeout(() => {
+      clearInterval(textInterval);
+      startAnimation();
+  }, 2500);
+});
