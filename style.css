@@ -688,7 +688,7 @@
         display: none;
       }
     }
-    @media screen and (max-width: 444px) and (max-height: 723px){
+    @media screen and  (max-height: 723px){
       .heading-container{
       margin-top: 30%;
       }
