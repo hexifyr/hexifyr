@@ -67,3 +67,27 @@ function spinImage(imageToSpin) {
 imageToSpin.addEventListener("click", function() {
     spinImage(imageToSpin);
 })
+
+
+function openDiscordApp() {
+    var userId = "1236035473625841735"; // Your Discord User ID Here
+
+    // check that the user has installed discord
+    if (window.navigator && window.navigator.msLaunchUri) {
+      // for Webbrowser
+      window.navigator.msLaunchUri("discord://user?id=" + userId);
+    } else if (window.navigator && window.navigator.userAgent.match(/(android|iphone|ipad)/i)) {
+      // for andorid and ios devices
+      window.location.href = "discord://user?id=" + userId;
+    } else {
+      // for other devices or webbrowsers
+      window.open("https://discord.com/users/" + userId);
+    }
+  }
+
+  function myFunction() {
+    var copyText = "LUejdqgSQZEdhgFonr5SMfwJfThPmTLyDU";
+    navigator.clipboard.writeText(copyText);
+    
+   alert("Wallet Address Copied!");
+  }
