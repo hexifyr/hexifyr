@@ -129,7 +129,7 @@ imageToSpin.addEventListener("click", function () {
 })
 
 
-const button = document.getElementById('button-container');
+const button = document.getElementById('viewmore');
 const initialButtonX = window.innerWidth / 2 - button.offsetWidth / 2;
 // console.log(button.style.width);
 const initialButtonY = window.innerHeight / 1.15;
@@ -259,3 +259,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
  console.log(" _____                                   \r\n|_   _|                                  \r\n  | |                                    \r\n  | |                                    \r\n _| |_                                   \r\n \\___/                                   \r\n                                         \r\n                                         \r\n                                         \r\n                                         \r\n ___  ___  ___                           \r\n/ __|/ _ \\/ _ \\                          \r\n\\__ \\  __/  __/                          \r\n|___/\\___|\\___|                          \r\n                                         \r\n                                         \r\n                                         \r\n                                         \r\n _   _  ___  _   _                       \r\n| | | |/ _ \\| | | |                      \r\n| |_| | (_) | |_| |                      \r\n \\__, |\\___/ \\__,_|                      \r\n  __/ |                                  \r\n |___/                                   \r\n                      _    _             \r\n                     | |  (_)            \r\n ___ _ __   ___  __ _| | ___ _ __   __ _ \r\n/ __| '_ \\ / _ \\/ _` | |/ / | '_ \\ / _` |\r\n\\__ \\ | | |  __/ (_| |   <| | | | | (_| |\r\n|___/_| |_|\\___|\\__,_|_|\\_\\_|_| |_|\\__, |\r\n                                    __/ |\r\n                                   |___/ \r\n _                                       \r\n(_)                                      \r\n _ _ __                                  \r\n| | '_ \\                                 \r\n| | | | |                                \r\n|_|_| |_|                                \r\n                                         \r\n                                         \r\n _   _                                   \r\n| | | |                                  \r\n| |_| |__   ___                          \r\n| __| '_ \\ / _ \\                         \r\n| |_| | | |  __/                         \r\n \\__|_| |_|\\___|                         \r\n                                         \r\n                                         \r\n                           _             \r\n                          | |            \r\n  ___ ___  _ __  ___  ___ | | ___        \r\n / __/ _ \\| '_ \\/ __|/ _ \\| |/ _ \\       \r\n| (_| (_) | | | \\__ \\ (_) | |  __/       \r\n \\___\\___/|_| |_|___/\\___/|_|\\___|       \r\n                                         \r\n                                         \r\n  ______                                 \r\n _|  _  \\                                \r\n(_) | | |                                \r\n  | | | |                                \r\n _| |/ /                                 \r\n(_)___/                                  \r\n                                         \r\n                                         ");
+
+
+ const fadeUpElements = document.querySelectorAll('.card');
+
+ const observer = new IntersectionObserver((entries) => {
+   entries.forEach((entry, index) => {
+     if (entry.isIntersecting) {
+       setTimeout(() => {
+         entry.target.classList.add('visible');
+         observer.unobserve(entry.target); // Stop observing once it's visible
+       }, index * 200); // Stagger the delay based on the index
+     }
+   });
+ }, {
+   threshold: 0.5 // Trigger when 10% of the element is visible
+ });
+ 
+ fadeUpElements.forEach(element => {
+   observer.observe(element);
+ });
+ 
