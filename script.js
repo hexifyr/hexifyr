@@ -1,7 +1,7 @@
-const container = document.querySelector("#container"),  
-    tile = document.querySelector(".tile");
+const container = document.querySelector("#container"),
+  tile = document.querySelector(".tile");
 
-for(let i = 0; i < 6299; i++) {
+for (let i = 0; i < 6299; i++) {
   container.appendChild(tile.cloneNode());
 }
 
@@ -29,13 +29,13 @@ for(let i = 0; i < 6299; i++) {
 //         if (elements[index - 1]) {
 //             // elements[index - 1].style.width = '45px';
 //         }
-       
+
 //         if (elements[index - 2]) {
 //             // elements[index - 2].style.width = '42.5px';
 //         }
 //         element.style.transform = 'translateY(-5px)';
 
-      
+
 //     });
 
 //     element.addEventListener('mouseout', () => {
@@ -48,29 +48,89 @@ for(let i = 0; i < 6299; i++) {
 // });
 
 
+var button2 = document.getElementById("viewmore");
 
+let magofniet = true;
+// Function to remove the background
+function removeBackground() {
+  setTimeout(() => {
+       // Calculate the current scroll position (vertical scroll + viewport height)
+       let scrollPosition = Math.round(document.body.scrollTop + window.innerHeight);
+
+       // Get the total height of the document
+       let documentHeight = Math.round(document.body.scrollHeight);
+   
+       console.log(`Scroll Position: ${scrollPosition}`);
+       console.log(`Document Height: ${documentHeight}`);
+   
+       // Check if the scroll position is less than the document height
+       if (scrollPosition < documentHeight) {
+        button2.style.backgroundColor = "#0e100f";
+        document.querySelector('.circle').style.display = 'block';
+        document.getElementById('button-container').style.opacity = '1';
+        document.getElementById('button-container').style.zIndex = '9999';
+        button2.style.cursor = "pointer";
+  
+        magofniet = true;
+        console.log('onzichtbaarniet')
+       }else{
+        
+      button2.style.backgroundColor = "transparent";
+      document.querySelector('.circle').style.display = 'none';
+      document.getElementById('button-container').style.opacity = '0.25';
+      document.getElementById('button-container').style.zIndex = '0';
+      button2.style.cursor = "default";
+
+      magofniet = false;
+       }
+
+    // // Check if the scroll position is less than the document height
+    // if (scrollPosition > documentHeight) {
+
+    //   button2.style.backgroundColor = "transparent";
+    //   document.querySelector('.circle').style.display = 'none';
+    //   document.getElementById('button-container').style.opacity = '0.25';
+    //   document.getElementById('button-container').style.zIndex = '0';
+    //   button2.style.cursor = "default";
+
+    //   magofniet = false;
+    // } else {
+    //   button2.style.backgroundColor = "#0e100f";
+    //   document.querySelector('.circle').style.display = 'block';
+    //   document.getElementById('button-container').style.opacity = '1';
+    //   document.getElementById('button-container').style.zIndex = '9999';
+    //   button2.style.cursor = "pointer";
+
+    //   magofniet = true;
+    // }
+  }, 550);
+
+};
+
+// Event listeners for click and wheel events
+window.addEventListener("wheel", removeBackground);
 
 
 let imageToSpin = document.getElementById('avatar');
 
 function spinImage(imageToSpin) {
- imageToSpin.style.animationName = 'spin';
- imageToSpin.style.animationDuration = '1s';
- setTimeout(() => {
-    
- imageToSpin.style.animationDuration = '3s';
- imageToSpin.style.animationName = 'floating2';
- }, 1000);
+  imageToSpin.style.animationName = 'spin';
+  imageToSpin.style.animationDuration = '1s';
+  setTimeout(() => {
+
+    imageToSpin.style.animationDuration = '3s';
+    imageToSpin.style.animationName = 'floating2';
+  }, 1000);
 }
 
 
-imageToSpin.addEventListener("click", function() {
-    spinImage(imageToSpin);
+imageToSpin.addEventListener("click", function () {
+  spinImage(imageToSpin);
 })
 
 
 const button = document.getElementById('button-container');
-const initialButtonX = window.innerWidth / 2 - button.offsetWidth /2;
+const initialButtonX = window.innerWidth / 2 - button.offsetWidth / 2;
 console.log(button.style.width);
 const initialButtonY = window.innerHeight / 1.15;
 const moveLimit = 0.1; // 5% limit
@@ -82,88 +142,90 @@ let isMouseOver = false; // Flag to track if the mouse is over the button
 
 
 function moveButtonWithinLimit(event) {
-    if (isMouseOver) {
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
+  if (isMouseOver) {
+    if (magofniet) {
+      const mouseX = event.clientX;
+      const mouseY = event.clientY + document.body.scrollTop;
 
-    // Calculate allowed movement boundaries
-    const limitX = initialButtonX * moveLimit;
-    const limitY = initialButtonY * moveLimit;
+      // Calculate allowed movement boundaries
+      const limitX = initialButtonX * moveLimit;
+      const limitY = initialButtonY * moveLimit;
 
-    // Calculate new position within boundaries
-    let newX = initialButtonX + (mouseX - initialButtonX) * moveLimit;
-    let newY = initialButtonY + (mouseY - initialButtonY) * moveLimit;
+      // Calculate new position within boundaries
+      let newX = initialButtonX + (mouseX - initialButtonX) * moveLimit;
+      let newY = initialButtonY + (mouseY - initialButtonY) * moveLimit;
 
-    // Ensure the new position is within the limit
-    newX = Math.max(initialButtonX - limitX, Math.min(newX, initialButtonX + limitX));
-    newY = Math.max(initialButtonY - limitY, Math.min(newY, initialButtonY + limitY));
+      // Ensure the new position is within the limit
+      newX = Math.max(initialButtonX - limitX, Math.min(newX, initialButtonX + limitX)) - 8;
+      newY = Math.max(initialButtonY - limitY, Math.min(newY, initialButtonY + limitY));
 
-    // Apply the new position
-    button.style.left = `${newX}px`;
-    button.style.top = `${newY}px`;
+      // Apply the new position
+      button.style.left = `${newX}px`;
+      button.style.top = `${newY}px`;
     }
+  }
 }
 
 document.addEventListener('mousemove', moveButtonWithinLimit);
 
 function onMouseEnter() {
-    isMouseOver = true; // Set flag to true when mouse is over
-  }
+  isMouseOver = true; // Set flag to true when mouse is over
+}
 
-  function onMouseLeave() {
-    isMouseOver = false; // Set flag to false when mouse leaves
-    const initialButtonX = window.innerWidth / 2 - button.offsetWidth /2;
-    const initialButtonY = window.innerHeight / 1.15;
+function onMouseLeave() {
+  isMouseOver = false; // Set flag to false when mouse leaves
+  const initialButtonX = window.innerWidth / 2 - button.offsetWidth / 2;
+  const initialButtonY = window.innerHeight / 1.15;
 
-    // Set initial position
-    button.style.left = `${initialButtonX}px`;
-    button.style.top = `${initialButtonY}px`;
+  // Set initial position
+  button.style.left = `${initialButtonX}px`;
+  button.style.top = `${initialButtonY}px`;
 
-  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-    // const button = document.getElementById('viewmore');
-    // const initialButtonX = window.innerWidth / 2;
-    // const initialButtonY = window.innerHeight / 1.25;
+  // const button = document.getElementById('viewmore');
+  // const initialButtonX = window.innerWidth / 2;
+  // const initialButtonY = window.innerHeight / 1.25;
 
-    // // Set initial position
-    // button.style.left = `${initialButtonX}px`;
-    // button.style.top = `${initialButtonY}px`;
-    button.addEventListener('mouseenter', onMouseEnter);
-    button.addEventListener('mouseleave', onMouseLeave);
-  });
+  // // Set initial position
+  // button.style.left = `${initialButtonX}px`;
+  // button.style.top = `${initialButtonY}px`;
+  button.addEventListener('mouseenter', onMouseEnter);
+  button.addEventListener('mouseleave', onMouseLeave);
+});
 // document.addEventListener('mousemove', moveButtonWithinLimit);
 
 
 document.getElementById("cards").onmousemove = e => {
-    for(const card of document.getElementsByClassName("card")) {
-      const rect = card.getBoundingClientRect(),
-            x = e.clientX - rect.left,
-            y = e.clientY - rect.top;
-  
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-    };
-  }
+  for (const card of document.getElementsByClassName("card")) {
+    const rect = card.getBoundingClientRect(),
+      x = e.clientX - rect.left,
+      y = e.clientY - rect.top;
+
+    card.style.setProperty("--mouse-x", `${x}px`);
+    card.style.setProperty("--mouse-y", `${y}px`);
+  };
+}
 
 
-  function updateTime() {
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    
-    const now = new Date();
-    const day = days[now.getDay()];
-    const month = months[now.getMonth()];
-    const date = now.getDate();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
+function updateTime() {
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+  const now = new Date();
+  const day = days[now.getDay()];
+  const month = months[now.getMonth()];
+  const date = now.getDate();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
 
-    const formattedTime = `${day}, ${month} ${date} ${formattedHours}:${formattedMinutes} ${ampm}`;
-    document.getElementById('time').textContent = formattedTime;
+  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+  const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+  const formattedTime = `${day}, ${month} ${date} ${formattedHours}:${formattedMinutes} ${ampm}`;
+  document.getElementById('time').textContent = formattedTime;
 }
 
 // Update the time immediately and then every second
@@ -171,19 +233,19 @@ updateTime();
 setInterval(updateTime, 1000);
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const helloText = document.getElementById("helloText");
   const overlay = document.getElementById("overlay");
   const greetings = ["Hello", "Bonjour", "Ciao", "Olà", "やあ", "Hallå", "مرحبا", "Guten tag", "Hallo", "नमस्ते"];
   let index = 0;
 
   function changeText() {
-      helloText.innerHTML = "<li>" + greetings[index] + "</li>";
-      index = (index + 1) % greetings.length;
+    helloText.innerHTML = "<li>" + greetings[index] + "</li>";
+    index = (index + 1) % greetings.length;
   }
 
   function startAnimation() {
-      overlay.classList.add("move-up");
+    overlay.classList.add("move-up");
   }
 
   // Change text every 500ms
@@ -191,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Start moving up animation after 3 seconds
   setTimeout(() => {
-      clearInterval(textInterval);
-      startAnimation();
+    clearInterval(textInterval);
+    startAnimation();
   }, 2500);
 });
