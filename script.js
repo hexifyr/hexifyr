@@ -129,7 +129,7 @@ imageToSpin.addEventListener("click", function () {
 })
 
 
-const button = document.getElementById('viewmore');
+const button = document.getElementById('button-container');
 const initialButtonX = window.innerWidth / 2 - button.offsetWidth / 2;
 // console.log(button.style.width);
 const initialButtonY = window.innerHeight / 1.15;
