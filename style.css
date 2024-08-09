@@ -263,25 +263,25 @@
         width: 50px;
         transform: translateY(-10px);
     }
-
+/* 
     .button-container{
       position: absolute;
-      margin-left: auto;
+      /* margin-left: auto; */
       /* margin-right: auto; */
       /* margin-top: auto; */
       /* left: 0; */
       /* right: 0; */
       /* bottom: 5%; */
-      text-align: center;
+      /* text-align: center;
       width: min-content;
       white-space: nowrap;
       z-index: 9999;
       transition: all 0.5s ease;
       
-    }
+    } */ 
     /* viewmore */
-    .button-container a{
-      position: relative;
+    #viewmore{
+      position: absolute;
       font-family: 'Ggsans';
       font-style: normal;
       cursor: pointer;
@@ -299,11 +299,11 @@
       align-items: center;
       background-color: #0e100f;
       overflow: hidden;
-      
-      transition: all 0s;
+      z-index: 999;
+      transition: opacity 0.5s ease, background-color 0.5s ease, z-index 0.5s ease;
     }
 
-    .button-container .circle{
+    #viewmore .circle{
       background-color: #FC1FCB;
       width: 125%;
       height: 10rem;
@@ -313,10 +313,10 @@
       border-radius: 50%;
     }
 
-    .button-container a span{
+    #viewmore span{
       z-index: 2;
     }
-    .button-container a:hover .circle {
+    #viewmore:hover .circle {
       width: 150%;
       top: -25%;
     }

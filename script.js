@@ -67,8 +67,8 @@ function removeBackground() {
        if (scrollPosition < documentHeight) {
         button2.style.backgroundColor = "#0e100f";
         document.querySelector('.circle').style.display = 'block';
-        document.getElementById('button-container').style.opacity = '1';
-        document.getElementById('button-container').style.zIndex = '9999';
+        document.getElementById('viewmore').style.opacity = '1';
+        document.getElementById('viewmore').style.zIndex = '9999';
         button2.style.cursor = "pointer";
   
         magofniet = true;
@@ -77,8 +77,8 @@ function removeBackground() {
         
       button2.style.backgroundColor = "transparent";
       document.querySelector('.circle').style.display = 'none';
-      document.getElementById('button-container').style.opacity = '0.25';
-      document.getElementById('button-container').style.zIndex = '0';
+      document.getElementById('viewmore').style.opacity = '0.25';
+      document.getElementById('viewmore').style.zIndex = '0';
       button2.style.cursor = "default";
 
       magofniet = false;
@@ -89,16 +89,16 @@ function removeBackground() {
 
     //   button2.style.backgroundColor = "transparent";
     //   document.querySelector('.circle').style.display = 'none';
-    //   document.getElementById('button-container').style.opacity = '0.25';
-    //   document.getElementById('button-container').style.zIndex = '0';
+    //   document.getElementById('viewmore').style.opacity = '0.25';
+    //   document.getElementById('viewmore').style.zIndex = '0';
     //   button2.style.cursor = "default";
 
     //   magofniet = false;
     // } else {
     //   button2.style.backgroundColor = "#0e100f";
     //   document.querySelector('.circle').style.display = 'block';
-    //   document.getElementById('button-container').style.opacity = '1';
-    //   document.getElementById('button-container').style.zIndex = '9999';
+    //   document.getElementById('viewmore').style.opacity = '1';
+    //   document.getElementById('viewmore').style.zIndex = '9999';
     //   button2.style.cursor = "pointer";
 
     //   magofniet = true;
@@ -129,41 +129,40 @@ imageToSpin.addEventListener("click", function () {
 })
 
 
-const button = document.getElementById('button-container');
+const button = document.getElementById('viewmore');
 const initialButtonX = window.innerWidth / 2 - button.offsetWidth / 2;
-// console.log(button.style.width);
 const initialButtonY = window.innerHeight / 1.15;
-const moveLimit = 0.1; // 5% limit
+const moveLimit = 0.1; // 10% limit
 
 // Set initial position
 button.style.left = `${initialButtonX}px`;
 button.style.top = `${initialButtonY}px`;
-let isMouseOver = false; // Flag to track if the mouse is over the button
 
+let isMouseOver = false; // Flag to track if the mouse is over the button
 
 function moveButtonWithinLimit(event) {
   if (isMouseOver) {
-    if (magofniet) {
-      const mouseX = event.clientX;
-      const mouseY = event.clientY + document.body.scrollTop;
+    if (magofniet === true){
+    const mouseX = event.clientX;
+    const mouseY = event.clientY + document.body.scrollTop;
 
-      // Calculate allowed movement boundaries
-      const limitX = initialButtonX * moveLimit;
-      const limitY = initialButtonY * moveLimit;
+    // Calculate allowed movement boundaries
+    const limitX = initialButtonX * moveLimit;
+    const limitY = initialButtonY * moveLimit;
 
-      // Calculate new position within boundaries
-      let newX = initialButtonX + (mouseX - initialButtonX) * moveLimit;
-      let newY = initialButtonY + (mouseY - initialButtonY) * moveLimit;
+    // Calculate new position within boundaries
+    let newX = initialButtonX + (mouseX - initialButtonX) * moveLimit;
+    let newY = initialButtonY + (mouseY - initialButtonY) * moveLimit;
 
-      // Ensure the new position is within the limit
-      newX = Math.max(initialButtonX - limitX, Math.min(newX, initialButtonX + limitX)) - 8;
-      newY = Math.max(initialButtonY - limitY, Math.min(newY, initialButtonY + limitY));
+    // Ensure the new position is within the limit
+    newX = Math.max(initialButtonX - limitX, Math.min(newX, initialButtonX + limitX)) - 8;
+    newY = Math.max(initialButtonY - limitY, Math.min(newY, initialButtonY + limitY));
 
-      // Apply the new position
-      button.style.left = `${newX}px`;
-      button.style.top = `${newY}px`;
-    }
+    // Apply the new position
+    button.style.left = `${newX}px`;
+    button.style.top = `${newY}px`;
   }
+}
 }
 
 document.addEventListener('mousemove', moveButtonWithinLimit);
